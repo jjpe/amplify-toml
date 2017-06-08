@@ -1,0 +1,23 @@
+use_reporting = false
+report_address = "tcp://127.0.0.1:9090"
+
+[spoofax_server]
+language_directory = "./languages/"
+receive_address = "tcp://127.0.0.1:6001"
+send_address = "tcp://127.0.0.1:6000"
+pretty_serialize = true
+
+[broadcaster]
+receive_address = "tcp://127.0.0.1:6000"
+broadcast_address = "tcp://127.0.0.1:6001"
+num_msgs = "loop"
+
+[collector]
+mongodb_url = "mongodb://localhost:27017"
+header_period = 50 # valid values: a nonnegative integral number
+num_events = "30" # valid values: either "loop" or "N" where N is a nonzero integral number
+
+[client]
+receive_address = "tcp://127.0.0.1:6001"
+send_address = "tcp://127.0.0.1:6000"
+num_msgs = "1000"
