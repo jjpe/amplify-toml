@@ -1,5 +1,6 @@
-use_reporting = false
-report_address = "tcp://127.0.0.1:9090"
+use_reporting = false # TODO: deprecated
+report_address = "tcp://127.0.0.1:9090" # TODO: deprecated
+quiet = false
 
 [spoofax_server]
 language_directory = "./languages/"
@@ -13,9 +14,10 @@ broadcast_address = "tcp://127.0.0.1:6001"
 num_msgs = "loop"
 
 [collector]
+receive_address = "tcp://127.0.0.1:6001"
 mongodb_url = "mongodb://localhost:27017"
 header_period = 50 # valid values: a nonnegative integral number
-num_events = "30" # valid values: either "loop" or "N" where N is a nonzero integral number
+num_msgs = "30" # valid values: either "loop" or "N" where N is a nonzero integral number
 
 [client]
 receive_address = "tcp://127.0.0.1:6001"
