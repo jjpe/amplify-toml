@@ -1,25 +1,37 @@
-use_reporting = false # TODO: deprecated
-report_address = "tcp://127.0.0.1:9090" # TODO: deprecated
-quiet = false
+client_receive_addr = "tcp://127.0.0.1:6001"
+client_send_addr = "tcp://127.0.0.1:6000"
+quiet = true # Set this to false to enable logging, which slows down the system.
 
 [spoofax_server]
 language_directory = "./languages/"
-receive_address = "tcp://127.0.0.1:6001"
-send_address = "tcp://127.0.0.1:6000"
 pretty_serialize = true
 
 [broadcaster]
-receive_address = "tcp://127.0.0.1:6000"
-broadcast_address = "tcp://127.0.0.1:6001"
 num_msgs = "loop"
 
 [collector]
-receive_address = "tcp://127.0.0.1:6001"
 mongodb_url = "mongodb://localhost:27017"
 header_period = 50 # valid values: a nonnegative integral number
-num_msgs = "30" # valid values: either "loop" or "N" where N is a nonzero integral number
+num_msgs = "loop" # valid values: either "loop" or "N" where N is a nonzero integral number
+db_name = "Collector"
+collection_name = "Msg"
 
-[client]
-receive_address = "tcp://127.0.0.1:6001"
-send_address = "tcp://127.0.0.1:6000"
+[client] # Test client
 num_msgs = "1000"
+
+[benchmark] # The benchmark control program
+num_iters = "10" # The number of iterations per combination i.e. sample size
+bench_paths = [
+    # The msg files to benchmark.
+    # Paths are absolute and non-globbed.
+]
+record_period = "10000"         # The time in milliseconds to use for recording the expected msg set
+iter_cooldown_period = "10000"  # The time in milliseconds to wait after a benchmark iteration
+receive_timeout = "10000"       # The Client receive timeout, in milliseconds
+start_revision = "9000"         # The revision number to start counting at.
+
+[viz] # The visualization server
+server_address = "http://127.0.0.1:3000" # The HTTP address to serve visualizations on
+
+[emacs__spoofax_mode] # spoofax-mode
+promiscuous = false # Set to true when benchmarking, for spoofax-mode performance data
