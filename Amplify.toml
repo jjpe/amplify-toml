@@ -1,6 +1,7 @@
 client_receive_addr = "tcp://127.0.0.1:6001"
 client_send_addr = "tcp://127.0.0.1:6000"
 quiet = true # Set this to false to enable logging, which slows down the system.
+serialize_using = "capnp" # Valid keys: "capnp", "json"
 
 [spoofax_server]
 language_directory = "./languages/"
@@ -20,6 +21,7 @@ collection_name = "Msg"
 num_msgs = "1000"
 
 [benchmark] # The benchmark control program
+quiet = false # Shadows the global setting
 num_iters = "10" # The number of iterations per combination i.e. sample size
 bench_paths = [
     # The msg files to benchmark.
@@ -33,5 +35,5 @@ start_revision = "9000"         # The revision number to start counting at.
 [viz] # The visualization server
 server_address = "http://127.0.0.1:3000" # The HTTP address to serve visualizations on
 
-[emacs__spoofax_mode] # spoofax-mode
+[emacs__spoofax_mode]
 promiscuous = false # Set to true when benchmarking, for spoofax-mode performance data
